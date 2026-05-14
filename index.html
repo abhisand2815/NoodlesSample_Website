@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noodles | The Art of Perfection</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- GSAP for smooth scrolling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Added from code.html -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FF2A00", // Bright Red for Scorched Intensity
+                        secondary: "#FFA000", // Fiery Orange
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#131313",
+                        "surface-dark": "#1C1C1C",
+                        "border-dark": "#333333"
+                    },
+                    fontFamily: {
+                        display: ["'Bebas Neue'", "sans-serif"],
+                        body: ["'Inter'", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-display {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <h1>NOODLES</h1>
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+            <p id="loader-text">Crafting the experience...</p>
+        </div>
+    </div>
+
+    <!-- Interactive Modal -->
+    <div id="modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div
+            class="relative bg-white w-[90%] max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-10 shadow-2xl border border-gray-200">
+            <button onclick="closeModal()"
+                class="absolute top-6 right-6 text-gray-400 hover:text-primary transition-colors">
+                <span class="material-icons">close</span>
+            </button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+
+    <nav class="fixed w-full z-50 transition-all duration-300 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center w-full">
+            <div class="flex items-center gap-3 cursor-pointer group">
+                <img src="logo.png" alt="Noodles Logo"
+                    class="h-10 w-10 object-contain rounded-full border-2 border-primary/50 group-hover:border-primary transition-colors">
+                <div class="font-display text-3xl tracking-widest text-white">
+                    <span class="text-primary group-hover:text-white transition-colors">C</span>HING'S
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#animation-container"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">The
+                    Craft</a>
+                <a href="#features"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Intensity</a>
+                <a href="#anatomy"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Anatomy</a>
+                <a href="#recipes"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Recipes</a>
+                <a href="#spice-ritual"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">The
+                    Ritual</a>
+                <a href="#social-spice"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Community</a>
+                <a href="#find-store"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Order</a>
+                <a href="#contact-us"
+                    class="nav-link text-white hover:text-primary uppercase text-xs tracking-widest transition-colors font-bold">Contact
+                    Us</a>
+            </div>
+            <a href="#find-store"
+                class="buy-now-btn bg-primary text-white px-8 py-3 rounded text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition-all shadow-lg shadow-primary/30">Buy
+                Now</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="animation-container">
+            <div class="sticky-wrapper">
+                <div class="hero-overlay">
+                    <h1
+                        class="text-6xl md:text-8xl font-display font-bold leading-tight text-white uppercase text-center mb-6 tracking-[0.5em]">
+                        Korean <span class="text-primary">Ramen</span>
+                    </h1>
+                    <p
+                        class="text-lg md:text-2xl text-gray-300 font-body font-bold text-center max-w-none mx-auto uppercase tracking-[0.4em] opacity-90 whitespace-nowrap">
+                        Triple the Spice, Infinite Flavor
+                    </p>
+                </div>
+                <canvas id="noodle-canvas"></canvas>
+
+                <!-- Other overlays -->
+                <div class="overlay-text section-1">
+                    <h2>Precision</h2>
+                    <p>Every strand is crafted with traditional techniques.</p>
+                </div>
+                <div class="overlay-text section-2">
+                    <h2>Texture</h2>
+                    <p>The perfect balance of softness and bite.</p>
+                </div>
+                <div class="overlay-text section-3">
+                    <h2>Flavor</h2>
+                    <p>Deep, complex broths aged for 48 hours.</p>
+                </div>
+            </div>
+            <div class="scroll-trigger-section"></div>
+        </section>
+
+        <!-- Added from code.html -->
+        <section id="features"
+            class="py-24 bg-gray-50 dark:bg-surface-dark border-y border-gray-200 dark:border-border-dark relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <h2
+                        class="text-5xl md:text-6xl font-display font-bold text-gray-900 dark:text-white mb-6 uppercase">
+                        Not for the <span class="text-primary">Weak</span></h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">Authentic Korean spices blended to perfection
+                        for a heat that builds and a flavor that lingers.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div
+                        class="bg-white dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-border-dark shadow-sm hover:shadow-md dark:hover:border-primary/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-primary/10 dark:bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-4xl text-primary group-hover:text-white">whatshot</span>
+                        </div>
+                        <h3
+                            class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wide">
+                            Extreme Heat</h3>
+                        <p class="text-gray-600 dark:text-gray-400">A fiery blend of premium red chili peppers that
+                            delivers an authentic Korean kick.</p>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-border-dark shadow-sm hover:shadow-md dark:hover:border-secondary/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-secondary/10 dark:bg-secondary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                            <span
+                                class="material-icons text-4xl text-secondary group-hover:text-white">ramen_dining</span>
+                        </div>
+                        <h3
+                            class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wide">
+                            Savory Soupy</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Thick, chewy noodles swimming in a rich, intensely
+                            flavorful and spicy broth.</p>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-background-dark p-8 rounded-xl border border-gray-100 dark:border-border-dark shadow-sm hover:shadow-md dark:hover:border-primary/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-primary/10 dark:bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <span class="material-icons text-4xl text-primary group-hover:text-white">eco</span>
+                        </div>
+                        <h3
+                            class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wide">
+                            Veggie Mix</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Includes a special seasoning veggie mix inside for
+                            added texture and taste.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="anatomy" class="py-24 bg-white dark:bg-background-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="w-full lg:w-1/2">
+                        <div
+                            class="relative p-8 bg-gray-50 dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-border-dark">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent rounded-2xl pointer-events-none">
+                            </div>
+                            <img alt="Ching's Secret Korean Ramen Pack Design"
+                                class="w-full h-auto drop-shadow-xl relative z-10"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe-SueF2fWrvFrx05nUF-A6oEvThGJdDLI-g-hKjmk_am0OulTuwD0rzLbFoHwaaln3he3GMDZ3X17k1bAeX_KVxQGeM8vBi61LVCFwr335s7-rWbRPoE7Hc1AoJYyS8HNPBNZ9RmOpQGK8LRwm8bxvRCCgekHoabl7VJ0d9V0DCKFa5Xv9MxSKGFRc90Jes5BvZoIdLGeRSKelauGzAU1KlCCihfE8GkPfk_y5pIrno6OGUFw100_Rbg0A89ojRrGywTkJ67Qc96h" />
+                            <div
+                                class="absolute top-1/4 right-1/4 w-6 h-6 bg-primary rounded-full animate-pulse border-2 border-white dark:border-gray-900 z-20 flex items-center justify-center cursor-pointer group">
+                                <div
+                                    class="absolute w-48 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm p-3 rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity -top-16 left-1/2 -translate-x-1/2 pointer-events-none z-30 font-medium">
+                                    Authentic Korean Hangul Design
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <h2
+                            class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-8 uppercase">
+                            The Anatomy of <span class="text-primary">Spice</span></h2>
+                        <div class="space-y-8">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded flex items-center justify-center mt-1">
+                                    <span class="material-icons text-primary">timer</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Instant Preparation
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Ready in just minutes. Boil, mix, and
+                                        brace yourself for the heat. Perfect for late-night cravings.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded flex items-center justify-center mt-1">
+                                    <span class="material-icons text-primary">public</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Authentic Korean
+                                        Recipe</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Crafted to match the beloved intense and
+                                        complex flavor profiles of traditional Korean street food.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded flex items-center justify-center mt-1">
+                                    <span class="material-icons text-primary">restaurant</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Spicy &amp; Savory
+                                        Soupy Noodles</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Designed to be enjoyed as a soup,
+                                        maximizing the surface area for the spicy broth to coat every noodle.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <button onclick="openNutritionModal()"
+                                class="inline-flex items-center text-primary font-bold hover:text-red-700 transition-colors uppercase tracking-widest border-b-2 border-primary pb-1">
+                                View Nutritional Facts <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 bg-gray-50 dark:bg-surface-dark border-t border-gray-200 dark:border-border-dark"
+            id="recipes">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div class="max-w-2xl">
+                        <h2
+                            class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4 uppercase">
+                            Hack Your <span class="text-primary">Ramen</span></h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-400">Take your Hot &amp; Spicy experience to the
+                            next level with these fan-favorite recipes.</p>
+                    </div>
+                    <a class="inline-flex items-center text-gray-900 dark:text-white font-bold hover:text-primary dark:hover:text-primary transition-colors border border-gray-300 dark:border-gray-700 px-6 py-2 rounded uppercase tracking-wider text-sm"
+                        href="#recipes">
+                        All Recipes
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(0)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Spicy Ramen Stir-fry"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMZhKUos-_j0ND63sDqEkN4c09uWBxuNQO9hoSW11Q67sDlhGr-uLzuPb4ixmBQIrKhzPQISMf6Uwes-lflsw24PDpTRInNUcSy53RpNsl9eiea4KLxzj9bxZ3MEIl1Fs7Dw39zegXFBx9uJA4BJsSMeOafvOSkf1joH7mENZrdB8mV7P-lJuIkOtJdsXDBFe7Cyut3iGK0LsZh16L0dQMPk8Y5LYrHwV9wxsgM6WfUeN1c-xmp9EFH2bExbuSnoyGWNczMOR3_a0G" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                10 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                Spicy Ramen Stir-fry</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Drain the broth and stir-fry with
+                                extra veggies and a fried egg for a dry-style intense flavor.</p>
+                            <div class="flex items-center text-primary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-secondary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(1)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Creamy Cheesy Ramen"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuApsQFhiHCH8jgMnD6EQ_pw2iK3MPD3ejyRglAPiE8AdFrbAOJA8j34ZOBLQy_3VBLlqMUalUsBLkp6XicbPutWIloXoiZt9uweQbC_EeoP5N2tx9sPOy_W-A7fUjw9Vo2Pm-xcOeu8abiIGX_R_neQH4-g61pDQ_4UQswfpm65oY-1wpJOXzid1OasrihB2fP6k_0CMOsQOMUdfpfDt28Ggtk9fkXro_MpFC35D0LUelsiU3exxxTVzHNTM97pEf3teROoAsmwGspU" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-secondary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                12 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-secondary transition-colors">
+                                Creamy Cheesy Ramen</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Tame the heat slightly by adding
+                                milk instead of water and topping with a slice of processed cheese.</p>
+                            <div
+                                class="flex items-center text-secondary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(2)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Seafood Spicy Ramen Bowl"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiIz68IA0PcFzf65K0UAuQyn99geSlVA48oCT3CTBVVfB4KL3t2hr11AEKi-ukKxUSgCtLuHhlDg9qKnb4juhPbyqJYCpe05nX72Tj4wmAodhQQ2NKsTjelrtp2HHyypC2BIhjlnAotHeYKq0VBSv4GnDCPuEZfqLL8GcTVQzyiDWLnW5IY64-kgVgZ5OtsRhmVMVayhQ404RTALOP5TtGbXdG36T6OqzpbADrd7eyXpd1nFg2lmDLE0aoGvohOnnVb7YZ-HfWyzNI" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                15 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                Seafood Spicy Bowl</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Elevate the soupy noodles with
+                                fresh shrimp, scallions, and a dash of sesame oil.</p>
+                            <div class="flex items-center text-primary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(3)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Kimchi Pork Ramen"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://s.soyrice.com/media/20250102171213/Korean-Kimchi-Pork-Ramen_done1-1024x643.jpg.webp" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                15 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                Kimchi Pork Ramen</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A soul-warming classic with aged
+                                kimchi and savory pork belly for deep authentic flavor.</p>
+                            <div class="flex items-center text-primary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-secondary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(4)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Tantanmen Spicy Ramen"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=2080" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-secondary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                18 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-secondary transition-colors">
+                                Tantanmen Nutty Ramen</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A rich, nutty sesame-based broth
+                                with minced meat and a serious chili oil punch.</p>
+                            <div
+                                class="flex items-center text-secondary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-white dark:bg-background-dark rounded-xl overflow-hidden border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-all shadow-sm hover:shadow-lg cursor-pointer"
+                        onclick="openRecipeModal(5)">
+                        <div class="relative h-64 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                            </div>
+                            <img alt="Spicy Garlic Butter Ramen"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=2070" />
+                            <div
+                                class="absolute top-4 left-4 z-20 bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+                                8 Min
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                Garlic Butter Heat</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Silky butter, roasted garlic, and
+                                spice flakes come together for an addictive finish.</p>
+                            <div class="flex items-center text-primary text-sm font-semibold uppercase tracking-wider">
+                                Get Recipe <span class="material-icons ml-1 text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Spice Ritual Section -->
+        <section id="spice-ritual" class="py-24 bg-background-dark relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <div
+                    class="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-primary to-transparent">
+                </div>
+                <div
+                    class="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-primary to-transparent">
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-20 gsap-reveal">
+                    <h2 class="text-5xl md:text-7xl font-display font-bold text-white mb-6 uppercase tracking-widest">
+                        The <span class="text-primary italic">Spice</span> Ritual
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                        Crafting the perfect bowl isn't just cooking; it's an art. Follow the ancient path to
+                        enlightenment.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div
+                        class="ritual-step p-8 bg-surface-dark border border-border-dark rounded-3xl hover:border-primary/50 transition-all duration-500 group">
+                        <div
+                            class="text-5xl font-display text-primary/20 mb-4 group-hover:text-primary transition-colors">
+                            01</div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase">Boil</h3>
+                        <p class="text-gray-400 text-sm">Pristine water at 100°C. The foundation of every bowl.</p>
+                    </div>
+                    <div
+                        class="ritual-step p-8 bg-surface-dark border border-border-dark rounded-3xl hover:border-primary/50 transition-all duration-500 group lg:mt-12">
+                        <div
+                            class="text-5xl font-display text-primary/20 mb-4 group-hover:text-primary transition-colors">
+                            02</div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase">Infuse</h3>
+                        <p class="text-gray-400 text-sm">Release the Gochugaru. Watch the transformation.</p>
+                    </div>
+                    <div
+                        class="ritual-step p-8 bg-surface-dark border border-border-dark rounded-3xl hover:border-primary/50 transition-all duration-500 group">
+                        <div
+                            class="text-5xl font-display text-primary/20 mb-4 group-hover:text-primary transition-colors">
+                            03</div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase">Toss</h3>
+                        <p class="text-gray-400 text-sm">Dance the noodles. Ensure every strand is cloaked.</p>
+                    </div>
+                    <div
+                        class="ritual-step p-8 bg-surface-dark border border-border-dark rounded-3xl hover:border-primary/50 transition-all duration-500 group lg:mt-12">
+                        <div
+                            class="text-5xl font-display text-primary/20 mb-4 group-hover:text-primary transition-colors">
+                            04</div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase">Garnish</h3>
+                        <p class="text-gray-400 text-sm">Add the final touch. Scallions, seeds, and perfection.</p>
+                    </div>
+                    <div
+                        class="ritual-step p-8 bg-surface-dark border border-border-dark rounded-3xl hover:border-primary/50 transition-all duration-500 group">
+                        <div
+                            class="text-5xl font-display text-primary/20 mb-4 group-hover:text-primary transition-colors">
+                            05</div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase">Ascend</h3>
+                        <p class="text-gray-400 text-sm">The first bite. A symphony of texture and heat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Spice Section -->
+        <section id="social-spice" class="py-24 bg-white dark:bg-background-dark overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="w-full lg:w-1/2 gsap-reveal">
+                        <h2
+                            class="text-5xl md:text-6xl font-display font-bold text-gray-900 dark:text-white mb-8 uppercase leading-tight">
+                            Loved by the <br><span class="text-primary text-shadow-glow">Community</span>
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="p-6 bg-gray-50 dark:bg-surface-dark rounded-2xl border-l-4 border-primary">
+                                <p class="text-lg italic text-gray-700 dark:text-gray-300 mb-4">"Finally found a ramen
+                                    that actually challenges my spice tolerance. The texture of the noodles is elite!"
+                                </p>
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                        RK</div>
+                                    <div>
+                                        <h4 class="font-bold dark:text-white">Rohan Kapoor</h4>
+                                        <p class="text-xs text-gray-500 uppercase">Verified Spice Lord</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-gray-50 dark:bg-surface-dark rounded-2xl border-l-4 border-secondary">
+                                <p class="text-lg italic text-gray-700 dark:text-gray-300 mb-4">"The Kimchi Pork hack is
+                                    a game changer. I make this at least 3 times a week!"</p>
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center font-bold text-secondary">
+                                        SA</div>
+                                    <div>
+                                        <h4 class="font-bold dark:text-white">Sarah Ahmed</h4>
+                                        <p class="text-xs text-gray-500 uppercase">Food Blogger</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 relative gsap-reveal">
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=600"
+                                class="rounded-2xl shadow-xl transform -rotate-3 hover:rotate-0 transition-transform duration-500"
+                                alt="Ramen fan photo">
+                            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=600"
+                                class="rounded-2xl shadow-xl transform rotate-6 mt-12 hover:rotate-0 transition-transform duration-500"
+                                alt="Ramen fan photo">
+                            <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=600"
+                                class="rounded-2xl shadow-xl transform -rotate-6 -mt-8 hover:rotate-0 transition-transform duration-500"
+                                alt="Ramen fan photo">
+                            <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&q=80&w=600"
+                                class="rounded-2xl shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                                alt="Ramen fan photo">
+                        </div>
+                        <div
+                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white p-8 rounded-full shadow-2xl animate-pulse">
+                            <span class="material-icons text-4xl">favorite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="find-store"
+            class="py-24 bg-white dark:bg-background-dark border-t border-gray-200 dark:border-border-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="bg-gray-900 dark:bg-surface-dark rounded-2xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-1/3 p-10 flex flex-col justify-center">
+                        <h2 class="text-4xl font-display font-bold text-white mb-4 uppercase">Find Your <span
+                                class="text-primary">Fix</span></h2>
+                        <p class="text-gray-400 mb-8">Locate the nearest store stocking Ching's Secret Korean Ramen.</p>
+                        <form class="space-y-4">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="material-icons text-gray-500">search</span>
+                                </span>
+                                <input id="store-input"
+                                    class="w-full bg-gray-800 border border-gray-700 text-white rounded py-3 pl-10 pr-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-gray-500 transition-colors"
+                                    placeholder="Enter Zip Code or City" type="text" />
+                            </div>
+                            <button id="store-search-btn"
+                                class="w-full bg-primary hover:bg-red-700 text-white font-bold py-3 px-4 rounded uppercase tracking-wider transition-colors shadow-lg shadow-primary/20"
+                                type="button">
+                                Search Stores
+                            </button>
+                        </form>
+                        <div id="store-results" class="mt-6 hidden">
+                            <!-- Results will appear here -->
+                        </div>
+                        <div class="mt-8 pt-8 border-t border-gray-800">
+                            <p class="text-sm text-gray-400 mb-4 uppercase tracking-wider font-semibold">Also available
+                                online</p>
+                            <div class="flex gap-4">
+                                <a class="bg-gray-800 hover:bg-gray-700 p-3 rounded flex-1 text-center text-white font-bold text-sm transition-colors border border-gray-700 hover:border-gray-500"
+                                    href="https://www.amazon.in" target="_blank">
+                                    Amazon
+                                </a>
+
+                                <a class="bg-gray-800 hover:bg-gray-700 p-3 rounded flex-1 text-center text-white font-bold text-sm transition-colors border border-gray-700 hover:border-gray-500"
+                                    href="https://www.blinkit.com" target="_blank">
+                                    Blinkit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-2/3 h-80 lg:h-auto relative bg-gray-200 dark:bg-gray-800">
+                        <div
+                            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&amp;fit=crop&amp;q=80&amp;w=2074')] bg-cover bg-center opacity-40 mix-blend-luminosity">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-gray-900 dark:from-surface-dark via-transparent to-transparent hidden lg:block">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-surface-dark via-transparent to-transparent lg:hidden">
+                        </div>
+                        <div class="absolute top-1/4 left-1/3">
+                            <div class="relative">
+                                <span
+                                    class="material-icons text-primary text-4xl drop-shadow-md animate-bounce">location_on</span>
+                                <div
+                                    class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-1 bg-black/30 rounded-[100%] blur-[2px]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 right-1/4">
+                            <div class="relative">
+                                <span class="material-icons text-primary text-3xl drop-shadow-md">location_on</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-1/3 left-2/3">
+                            <div class="relative">
+                                <span class="material-icons text-primary text-3xl drop-shadow-md">location_on</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Us Section -->
+        <section id="contact-us" class="py-24 bg-gradient-to-br from-primary to-orange-600 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                <div class="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h2 class="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase tracking-wider">Join
+                    the Heat</h2>
+                <p class="text-white/80 mb-12 text-lg font-body">Questions? Feedback? Or just want to share your ramen
+                    hacks?</p>
+
+                <div id="contact-form-container"
+                    class="bg-white/10 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/20 shadow-2xl transition-all duration-500">
+                    <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-white text-xs uppercase tracking-widest font-bold">Full Name</label>
+                            <input type="text" required
+                                class="bg-white/10 border border-white/20 rounded p-3 text-white placeholder-white/40 focus:outline-none focus:border-white/50 transition-all"
+                                placeholder="Enter your name">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-white text-xs uppercase tracking-widest font-bold">Email Address</label>
+                            <input type="email" required
+                                class="bg-white/10 border border-white/20 rounded p-3 text-white placeholder-white/40 focus:outline-none focus:border-white/50 transition-all"
+                                placeholder="Enter your email">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-white text-xs uppercase tracking-widest font-bold">Country</label>
+                            <select id="country-select" required
+                                class="bg-white/10 border border-white/20 rounded p-3 text-white focus:outline-none focus:border-white/50 transition-all">
+                                <option value="" class="bg-orange-600">Select Country</option>
+                                <option value="+91" class="bg-orange-600">India</option>
+                                <option value="+1" class="bg-orange-600">USA</option>
+                                <option value="+44" class="bg-orange-600">UK</option>
+                                <option value="+1" class="bg-orange-600">Canada</option>
+                                <option value="+61" class="bg-orange-600">Australia</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-white text-xs uppercase tracking-widest font-bold">Phone Number</label>
+                            <div class="flex gap-2">
+                                <input id="country-code" type="text" readonly
+                                    class="w-16 bg-white/10 border border-white/20 rounded p-3 text-white text-center"
+                                    value="+91">
+                                <input type="tel" required
+                                    class="flex-1 bg-white/10 border border-white/20 rounded p-3 text-white placeholder-white/40 focus:outline-none focus:border-white/50 transition-all"
+                                    placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="md:col-span-2 flex flex-col gap-2">
+                            <label class="text-white text-xs uppercase tracking-widest font-bold">Your Message</label>
+                            <textarea rows="4"
+                                class="bg-white/10 border border-white/20 rounded p-3 text-white placeholder-white/40 focus:outline-none focus:border-white/50 transition-all"
+                                placeholder="Tell us more..."></textarea>
+                        </div>
+                        <div class="md:col-span-2 mt-4">
+                            <button type="submit"
+                                class="w-full bg-white text-primary font-bold py-4 rounded uppercase tracking-widest hover:bg-secondary hover:text-white transition-all shadow-xl">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer id="main-footer"
+            class="bg-white dark:bg-background-dark border-t border-gray-200 dark:border-border-dark pt-16 pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                    <div class="col-span-1 md:col-span-2">
+                        <span class="font-display text-4xl tracking-wider text-primary mb-4 block">CHING'S SECRET</span>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-sm">
+                            Bringing authentic Desi Chinese and now intense Korean flavors to your kitchen. Dare to turn
+                            up the heat.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a class="w-10 h-10 rounded bg-gray-100 dark:bg-surface-dark flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-colors"
+                                href="#">
+                                <span class="material-icons">facebook</span>
+                            </a>
+                            <a class="w-10 h-10 rounded bg-gray-100 dark:bg-surface-dark flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-colors"
+                                href="#">
+                                <span class="material-icons">camera_alt</span>
+                            </a>
+                            <a class="w-10 h-10 rounded bg-gray-100 dark:bg-surface-dark flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-colors"
+                                href="#">
+                                <span class="material-icons">play_arrow</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-900 dark:text-white font-bold uppercase tracking-wider mb-4">Products</h4>
+                        <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#animation-container">Korean
+                                    Ramen</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#features">Hakka Noodles</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#recipes">Sauces</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#spice-ritual">Soups</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-900 dark:text-white font-bold uppercase tracking-wider mb-4">Company</h4>
+                        <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <li><a class="hover:text-primary transition-colors" href="#anatomy">About Us</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#contact-us">Contact</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#main-footer">Privacy Policy</a>
+                            </li>
+                            <li><a class="hover:text-primary transition-colors" href="#main-footer">Terms of Service</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-gray-200 dark:border-border-dark pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-500 dark:text-gray-500 text-sm">
+                        © 2023 Ching's Secret. All rights reserved.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500 dark:text-gray-500">
+                        <span class="mr-2">Made with</span>
+                        <span class="material-icons text-primary text-sm">whatshot</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

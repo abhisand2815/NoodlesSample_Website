@@ -1,0 +1,230 @@
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #e63946;
+    --secondary-color: #f1faee;
+    --font-main: 'Outfit', sans-serif;
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --nav-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+/* Loader */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-content h1 {
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 2px;
+    background: #333;
+    margin: 0 auto 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+nav {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+}
+
+nav.scrolled {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 0 6rem;
+    height: 70px;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.4s var(--ease);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.buy-now-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.buy-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.6s;
+    z-index: -1;
+}
+
+.buy-now-btn:hover::before {
+    left: 100%;
+}
+
+/* GSAP Reveal Base Styles */
+.gsap-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.gsap-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation Section */
+#animation-container {
+    position: relative;
+    width: 100%;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#noodle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 0 2rem;
+    z-index: 10;
+    pointer-events: none;
+    text-align: center;
+}
+
+.scroll-trigger-section {
+    height: 400vh; /* Control the scroll length */
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 40%;
+    opacity: 0;
+    transform: translateY(100px);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.overlay-text.section-1 { left: 10%; }
+.overlay-text.section-2 { left: 50%; }
+.overlay-text.section-3 { left: 10%; }
+
+.overlay-text h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.overlay-text p {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* Utilities */
+.reveal-text {
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .overlay-text {
+        width: 80%;
+        left: 10% !important;
+    }
+    
+    .overlay-text h2 {
+        font-size: 2.5rem;
+    }
+}
